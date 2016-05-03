@@ -1,0 +1,29 @@
+//finding all contiguous sum in an array i.e if A[1....N] then summation(A[i]) from i=L to j=R.
+#include<bits/stdc++.h>
+using namespace std;
+long long sum[2000005];
+int main()
+{
+   int n,k;
+	cin>>n>>k;
+	int a[n+2],x=0,l,r;
+	long long pre_a[n+2];
+	for(int i=0;i<n;i++)
+     { cin>>a[i+1]; pre_a[i+1]=0;}
+    pre_a[1]=a[1];
+    pre_a[0]=0;
+   for(int i=2;i<=n;i++)
+     pre_a[i]=pre_a[i-1]+a[i];
+    for(l=0;l<=n-1;l++)
+        {
+            sum[x++]=pre_a[n]-pre_a[l];
+          for(r=n;r>l+1;r--)
+            {
+                sum[x]=pre_a[n]-(pre_a[n]-pre_a[r-1]); sum[x]-=pre_a[l]; x++;
+            }
+         }
+       sort(sum,sum+x);
+        for(int i=x-1;i>=x-k;i--)
+        cout<<sum[i]<<" ";
+}
+
