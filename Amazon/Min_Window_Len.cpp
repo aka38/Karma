@@ -36,9 +36,9 @@ int modpow(ll a,ll x){
 map<char,int> a,b;
 int main(){
 	string s,pat;
-	getline(cin,s);
+	getline(cin,s); // input of sting with spaces
 	cin>>pat;
-	//cout<<s.size()<<" "<<pat.size()<<endl;
+	
 	int min_len=INT_MAX;
 	int pre=0;
 	int count=0;
@@ -46,36 +46,29 @@ int main(){
 	
 	for (int i = 0; i < pat.size(); i++)
         b[pat[i]]++;
-   
-   
+        
 	for(int j=0;j<s.size();j++)
 	{
-
-	   int k=s[j];
-       a[k]++;
-       if(a[k]<=b[k] )
-       	count++;
-       if(count==pat.size())
-       {
-	       	while(a[s[pre]]>b[s[pre]])
-	       		a[s[pre++]]--;
-	       		
-	       	
-       
-       int window = j-pre+1;
-       if(min_len>window)
-       {
-       	min_len=window;
-       	index=pre;
-       }
-   }
+               auto k=s[j];
+	       a[k]++;
+	       if(a[k]<=b[k] )
+		count++;
+	       if(count==pat.size())
+	       {
+			while(a[s[pre]]>b[s[pre]])
+				a[s[pre++]]--;
+		       int window = j-pre+1;
+		       if(min_len>window)
+		       {
+			min_len=window;
+			index=pre;
+	               }
+               }
 
 	}
-	//bcout<<index<<"\n";
-	if(index!=-1)
-		{
-			cout<<index<<" "<<min_len<<"\n";
-		}
+
+	if(index!=-1) cout<<index<<" "<<min_len<<"\n";
+		
 
 return 0;
 }
